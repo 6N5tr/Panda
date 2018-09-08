@@ -26,21 +26,7 @@ namespace Panda
             textBox2.UseSystemPasswordChar = true;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                textBox2.UseSystemPasswordChar = false;
-            }
-            else
-            {
-                textBox2.UseSystemPasswordChar = true;
-
-            }
-
-
-        }
-               
+                     
         private void button1_Click_1(object sender, EventArgs e)
         
         {
@@ -92,6 +78,19 @@ namespace Panda
 
                 MessageBox.Show("Nombre de usuario o contraseña invalidos");
                 textBox2.Text = "";
+
+            }
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                textBox2.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                textBox2.UseSystemPasswordChar = true;
 
             }
         }

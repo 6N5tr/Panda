@@ -41,5 +41,20 @@ namespace Panda
 
             }
         }
+
+        private void productosToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if ((Application.OpenForms["Productos"] as Productos) != null)
+            {
+                //Form is already open
+            }
+            else
+            {
+                Productos pro = new Productos();
+                pro.MdiParent = this;
+                pro.Show();
+            }
+            
+        }
     }
 }
