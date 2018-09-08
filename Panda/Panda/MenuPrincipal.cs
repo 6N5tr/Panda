@@ -13,7 +13,7 @@ namespace Panda
 {
     public partial class MenuPrincipal : Form
     {
-
+        
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -44,17 +44,59 @@ namespace Panda
 
         private void productosToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            
             if ((Application.OpenForms["Productos"] as Productos) != null)
             {
-                //Form is already open
+                List<Form> forms = new List<Form>();
+
+                // All opened myForm instances
+                foreach (Form f in Application.OpenForms)
+                    if (f.Name == "Productos")
+                        forms.Add(f);
+
+                // Now let's close opened myForm instances
+                foreach (Form f in forms)
+                    f.Close();
+
+                Productos prod = new Productos();
+                prod.MdiParent = this;
+                prod.Show();
             }
             else
             {
-                Productos pro = new Productos();
-                pro.MdiParent = this;
-                pro.Show();
+                Productos prod = new Productos();
+                prod.MdiParent = this;
+                prod.Show();
             }
             
         }
+
+        private void proveedoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((Application.OpenForms["Proveedores"] as Proveedores) != null)
+            {
+                List<Form> forms = new List<Form>();
+
+                // All opened myForm instances
+                foreach (Form f in Application.OpenForms)
+                    if (f.Name == "Proveedores")
+                        forms.Add(f);
+
+                // Now let's close opened myForm instances
+                foreach (Form f in forms)
+                    f.Close();
+
+                Proveedores prov = new Proveedores();
+                prov.MdiParent = this;
+                prov.Show();
+            }
+            else
+            {
+            Proveedores prov = new Proveedores();
+            prov.MdiParent = this;
+            prov.Show();
+            }
+        }
+
     }
 }

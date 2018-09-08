@@ -44,7 +44,7 @@
             this.button1.Location = new System.Drawing.Point(123, 134);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 36);
-            this.button1.TabIndex = 11;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Aceptar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -54,14 +54,14 @@
             this.textBox2.Location = new System.Drawing.Point(167, 58);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(165, 20);
-            this.textBox2.TabIndex = 9;
+            this.textBox2.TabIndex = 1;
             // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(167, 25);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(165, 20);
-            this.textBox1.TabIndex = 8;
+            this.textBox1.TabIndex = 0;
             // 
             // label2
             // 
@@ -86,7 +86,7 @@
             this.textBox3.Location = new System.Drawing.Point(167, 91);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(165, 20);
-            this.textBox3.TabIndex = 13;
+            this.textBox3.TabIndex = 2;
             // 
             // label3
             // 
@@ -117,7 +117,7 @@
             this.Name = "Inicio";
             this.Opacity = 0D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Inicio";
+            this.Text = "1";
             this.Load += new System.EventHandler(this.Inicio_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

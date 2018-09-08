@@ -34,8 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(373, 287);
+            this.ClientSize = new System.Drawing.Size(555, 321);
             this.Name = "ProductoAgregar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Agregar Producto";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProductoAgregar_FormClosing);
             this.ResumeLayout(false);

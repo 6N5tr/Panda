@@ -59,14 +59,14 @@
             this.textBox1.Location = new System.Drawing.Point(148, 25);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(165, 20);
-            this.textBox1.TabIndex = 2;
+            this.textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(148, 67);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(165, 20);
-            this.textBox2.TabIndex = 3;
+            this.textBox2.TabIndex = 1;
             // 
             // checkBox1
             // 
@@ -84,7 +84,7 @@
             this.button1.Location = new System.Drawing.Point(162, 135);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(113, 36);
-            this.button1.TabIndex = 5;
+            this.button1.TabIndex = 2;
             this.button1.Text = "Ingresar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);

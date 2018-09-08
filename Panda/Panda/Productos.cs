@@ -24,14 +24,13 @@ namespace Panda
                 //Form is already open
             }
             else
-            {
-                
+            {                
                 ProductoAgregar PA = new ProductoAgregar();
-                PA.ShowDialog();
-              
+                PA.ShowDialog();              
             }
             
            
         }
+        
     }
 }
