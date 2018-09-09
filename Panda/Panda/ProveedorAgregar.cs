@@ -30,7 +30,7 @@ namespace Panda
             command.ExecuteNonQuery();
 
 
-            MessageBox.Show("Proveedor agregado exitosamente");
+            MessageBox.Show("Proveedor agregado exitosamente!");
 
          
            SqlCommand cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);

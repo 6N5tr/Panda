@@ -13,6 +13,7 @@ namespace Panda
 {
     public partial class Proveedores : Form
     {
+        string id;
         public Proveedores()
         {
             InitializeComponent();
@@ -38,6 +39,60 @@ namespace Panda
              
         }
 
-       
+
+
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Desea conservar los cambios realizados?", "Borrar", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                
+
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                this.dataGridView1.CancelEdit();
+            }
+        }
+
+        private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Desea eliminar los campos seleccionados?", "Borrar", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                //do something
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+
+        }
+
+        private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (dataGridView1.SelectedCells.Count > 0)
+            {
+                id=dataGridView1.SelectedCells[0].Value.ToString();
+               
+                SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] where CodigoProveedor='" + id + "'", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        id = dr[0].ToString();
+                        MessageBox.Show(id);
+                    }
+                    dr.Close();
+                    con.Close();
+                }
+
+            }
+
+        }
     }
 }
