@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.CodigoProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreProveedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Telefono = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Preventa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Posventa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,11 +47,11 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
+            this.CodigoProveedor,
+            this.NombreProveedor,
+            this.Telefono,
+            this.Preventa,
+            this.Posventa});
             this.dataGridView1.Location = new System.Drawing.Point(12, 71);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -60,37 +60,6 @@
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dataGridView1_UserDeletingRow);
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "CodigoProveedor";
-            this.Column1.HeaderText = "Codigo";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.DataPropertyName = "NombreProveedor";
-            this.Column2.HeaderText = "Nombre";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "Telefono";
-            this.Column3.HeaderText = "Teléfono";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "Preventa";
-            this.Column4.HeaderText = "Preventa";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "Posventa";
-            this.Column5.HeaderText = "Posventa";
-            this.Column5.Name = "Column5";
             // 
             // button2
             // 
@@ -134,6 +103,37 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Codigo Proveedor";
             // 
+            // CodigoProveedor
+            // 
+            this.CodigoProveedor.DataPropertyName = "CodigoProveedor";
+            this.CodigoProveedor.HeaderText = "Codigo";
+            this.CodigoProveedor.Name = "CodigoProveedor";
+            // 
+            // NombreProveedor
+            // 
+            this.NombreProveedor.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NombreProveedor.DataPropertyName = "NombreProveedor";
+            this.NombreProveedor.HeaderText = "Nombre";
+            this.NombreProveedor.Name = "NombreProveedor";
+            // 
+            // Telefono
+            // 
+            this.Telefono.DataPropertyName = "Telefono";
+            this.Telefono.HeaderText = "Teléfono";
+            this.Telefono.Name = "Telefono";
+            // 
+            // Preventa
+            // 
+            this.Preventa.DataPropertyName = "Preventa";
+            this.Preventa.HeaderText = "Preventa";
+            this.Preventa.Name = "Preventa";
+            // 
+            // Posventa
+            // 
+            this.Posventa.DataPropertyName = "Posventa";
+            this.Posventa.HeaderText = "Posventa";
+            this.Posventa.Name = "Posventa";
+            // 
             // Proveedores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,11 +161,11 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoProveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProveedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Telefono;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Preventa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Posventa;
     }
 }

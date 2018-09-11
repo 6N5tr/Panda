@@ -14,6 +14,9 @@ namespace Panda
     public partial class Proveedores : Form
     {
         string id;
+        string nid;
+        string IdProv;
+
         public Proveedores()
         {
             InitializeComponent();
@@ -33,31 +36,35 @@ namespace Panda
              SqlDataAdapter da = new SqlDataAdapter(cmd);
              DataTable table = new DataTable();
              da.Fill(table);
-             dataGridView1.DataSource = new BindingSource(table, null);
-
-           
-             
+             dataGridView1.DataSource = new BindingSource(table, null);       
         }
 
 
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Desea conservar los cambios realizados?", "Borrar", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                
+            int rowindex = dataGridView1.CurrentCell.RowIndex;
+            int columnindex = dataGridView1.CurrentCell.ColumnIndex;
+            nid = dataGridView1.Rows[rowindex].Cells[columnindex].Value.ToString();
+            if (id != nid) {
+                DialogResult dialogResult = MessageBox.Show("Desea conservar los cambios realizados?", "Borrar", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
 
 
+
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    this.dataGridView1.CancelEdit();
+                }
             }
-            else if (dialogResult == DialogResult.No)
-            {
-                this.dataGridView1.CancelEdit();
-            }
+            
         }
 
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
+            
             DialogResult dialogResult = MessageBox.Show("Desea eliminar los campos seleccionados?", "Borrar", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
@@ -72,20 +79,30 @@ namespace Panda
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+
+
             if (dataGridView1.SelectedCells.Count > 0)
             {
-                id=dataGridView1.SelectedCells[0].Value.ToString();
+
+
+                int rowindex = dataGridView1.CurrentCell.RowIndex;
+                int columnindex = dataGridView1.CurrentCell.ColumnIndex;
+                id = dataGridView1.Rows[rowindex].Cells[columnindex].Value.ToString();
+
+                string columnName = dataGridView1.Columns[columnindex].Name;
                
+
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] where CodigoProveedor='" + id + "'", con);
+                SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] Where "+columnName+"='"+id+"'", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
                     while (dr.Read())
                     {
-                        id = dr[0].ToString();
-                        MessageBox.Show(id);
+                       
+                        IdProv = dr[0].ToString();
+                                         
                     }
                     dr.Close();
                     con.Close();

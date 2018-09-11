@@ -29,7 +29,6 @@ namespace Panda
             SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Proveedor] Values ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "')", con);
             command.ExecuteNonQuery();
 
-
             MessageBox.Show("Proveedor agregado exitosamente!");
 
          
