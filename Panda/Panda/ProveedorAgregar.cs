@@ -47,17 +47,7 @@ namespace Panda
 
             }
             reader.Close();
-            check_User_Name = new SqlCommand("SELECT Telefono FROM[dbo].[Proveedor] WHERE Telefono = '" + textBox3.Text + "'  ", con);
-            check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
-            reader = check_User_Name.ExecuteReader();
-            if (reader.HasRows)
-            {
-                MessageBox.Show("Verifique el numero de teléfono del proveedor. Ya existe un proveedor con ese número de teléfono!");
-                textBox3.Text = "";
-                dupl = true;
-
-
-            }
+            
             if(dupl==false)
             {
                 reader.Close();

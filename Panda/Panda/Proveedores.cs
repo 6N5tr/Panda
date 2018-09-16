@@ -16,6 +16,7 @@ namespace Panda
         string id;
         string nid;
         string IdProv;
+        bool dupl = false;
 
         public Proveedores()
         {
@@ -53,17 +54,55 @@ namespace Panda
                 DialogResult dialogResult = MessageBox.Show("Desea conservar los cambios realizados?", "Borrar", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
+                    
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con.Open();
-                    SqlCommand command = new SqlCommand("UPDATE [dbo].[Proveedor] SET [" + columnName + "] = '" + nid + "' WHERE IdProveedor = '" + IdProv + "'", con);
-                    command.ExecuteNonQuery();
-                    MessageBox.Show("Modificación realizada exitosamente!");
+                    SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProveedor FROM[dbo].[Proveedor] WHERE CodigoProveedor = '" + nid + "'", con);
+                    check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
+                    SqlDataReader reader = check_User_Name.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Verifique el codigo del proveedor. Ya existe un proveedor con ese codigo!");
+                        dupl = true;
 
-                    SqlCommand cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable table = new DataTable();
-                    da.Fill(table);
-                    dataGridView1.DataSource = new BindingSource(table, null);
+                    }
+                    reader.Close();
+
+                    check_User_Name = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] WHERE NombreProveedor = '" + nid + "'", con);
+                    check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
+                    reader = check_User_Name.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        MessageBox.Show("Verifique el nombre del proveedor. Ya existe un proveedor con ese nombre!");
+                        dupl = true;
+
+                    }
+                    reader.Close();
+
+                    
+                    if (dupl == true)
+                    {
+                        this.dataGridView1.CancelEdit();
+                        SqlCommand cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable table = new DataTable();
+                        da.Fill(table);
+                        dataGridView1.DataSource = new BindingSource(table, null);
+
+                    }
+                    else
+                    {
+                        SqlCommand command = new SqlCommand("UPDATE [dbo].[Proveedor] SET [" + columnName + "] = '" + nid + "' WHERE IdProveedor = '" + IdProv + "'", con);
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Modificación realizada exitosamente!");
+
+                        SqlCommand cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable table = new DataTable();
+                        da.Fill(table);
+                        dataGridView1.DataSource = new BindingSource(table, null);
+
+                    }
 
 
                 }
