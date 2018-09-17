@@ -102,6 +102,8 @@ namespace Panda
                         da.Fill(table);
                         dataGridView1.DataSource = new BindingSource(table, null);
 
+                        MessageBox.Show(Login.Emp+" " + DateTime.Today+" "+ DateTime.Now.ToString("h:mm:ss tt"));
+
                     }
 
 

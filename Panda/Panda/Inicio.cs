@@ -11,14 +11,14 @@ using System.Data.SqlClient;
 
 namespace Panda
 {
-    
+
     public partial class Inicio : Form
 
     {
         int cont = 0;
         public Inicio()
         {
-            
+
             InitializeComponent();
         }
 
@@ -32,7 +32,8 @@ namespace Panda
         private void timer1_Tick(object sender, EventArgs e)
         {
             cont = cont + 1;
-            if (cont == 10) {
+            if (cont == 10)
+            {
 
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 SqlDataAdapter sda = new SqlDataAdapter("SELECT * FROM[dbo].[Login]", con);
@@ -43,17 +44,17 @@ namespace Panda
 
                 if (dt.Rows.Count >= 1)
                 {
-                    
+
                     this.Hide();
                     Login ingreso = new Login();
                     ingreso.Show();
-                    timer1.Enabled = false;   
+                    timer1.Enabled = false;
                 }
                 else
                 {
                     this.Opacity = 100;
                 }
-               
+
 
             }
 
@@ -80,23 +81,26 @@ namespace Panda
             }
 
         }
-        bool close = true;
+        
         private void Inicio_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-            if (close)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                DialogResult result = MessageBox.Show("Desea salir del programa?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                dynamic mboxResult = MessageBox.Show("Desea salir de programa?", "Salir", MessageBoxButtons.YesNo);
+                if (mboxResult == DialogResult.No)
                 {
-                    close = false;
-                    Application.Exit();
-
-                }
-                else
-                {
+                    /* Cancel the Closing event from closing the form. */
                     e.Cancel = true;
                 }
+
+                else if (mboxResult == DialogResult.Yes)
+                {
+                    /* Closing the form. */
+                    e.Cancel = false;
+                    Application.Exit();
+                }
             }
+
+        }
     }
 }

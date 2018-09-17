@@ -98,23 +98,26 @@ namespace Panda
             }
         }
 
-        bool close = true;
+       
         private void MenuPrincipal_FormClosing_1(object sender, FormClosingEventArgs e)
         {
-            if (close) {
-                DialogResult result = MessageBox.Show("Desea salir del programa?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                dynamic mboxResult = MessageBox.Show("Desea salir de programa?", "Salir", MessageBoxButtons.YesNo);
+                if (mboxResult == DialogResult.No)
                 {
-                    close = false;
-                    Application.Exit();
-                    
-                }
-                else
-                {
+                    /* Cancel the Closing event from closing the form. */
                     e.Cancel = true;
                 }
+
+                else if (mboxResult == DialogResult.Yes)
+                {
+                    /* Closing the form. */
+                    e.Cancel = false;
+                    Application.Exit();
+                }
             }
-         
+
         }
     }
 }

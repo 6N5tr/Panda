@@ -12,9 +12,12 @@ using System.Data.SqlClient;
 
 namespace Panda
 {
+
+
     public partial class Login : Form
     {
         public static string Emp { get; internal set; }
+        public static string User { get; internal set; }
 
         public Login()
         {
@@ -26,9 +29,8 @@ namespace Panda
             textBox2.UseSystemPasswordChar = true;
         }
 
-                     
         private void button1_Click_1(object sender, EventArgs e)
-        
+
         {
 
 
@@ -61,17 +63,30 @@ namespace Panda
                 while (dr.Read())
                 {
                     Emp = dr[0].ToString();
+
                 }
-                dr.Close();
-                con.Close();
             }
-                        
+            dr.Close();
+            cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+            dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                while (dr.Read())
+                {
+                    Emp = dr[0].ToString();
+                    User = Emp;
+                    
+                }
+               
+            }
             if (dt.Rows.Count == 1)
             {
 
                 this.Hide();
                 MenuPrincipal main = new MenuPrincipal();
                 main.Show();
+                dr.Close();
+                con.Close();
             }
             else
             {
@@ -94,23 +109,25 @@ namespace Panda
 
             }
         }
-        bool close = true;
+       
         private void Login_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-            if (close)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                DialogResult result = MessageBox.Show("Desea salir del programa?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                dynamic mboxResult = MessageBox.Show("Desea salir de programa?", "Salir", MessageBoxButtons.YesNo);
+                if (mboxResult == DialogResult.No)
                 {
-                    close = false;
-                    Application.Exit();
-
-                }
-                else
-                {
+                    /* Cancel the Closing event from closing the form. */
                     e.Cancel = true;
                 }
+
+                else if (mboxResult == DialogResult.Yes)
+                {
+                    /* Closing the form. */
+                    e.Cancel = false;
+                    Application.Exit();
+                }
             }
+        }
     }
 }
