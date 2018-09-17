@@ -16,6 +16,7 @@ namespace Panda
         string id;
         string nid;
         string IdProv;
+        string Provel;
         bool dupl = false;
 
         public Proveedores()
@@ -102,7 +103,11 @@ namespace Panda
                         da.Fill(table);
                         dataGridView1.DataSource = new BindingSource(table, null);
 
-                        MessageBox.Show(Login.Emp+" " + DateTime.Today+" "+ DateTime.Now.ToString("h:mm:ss tt"));
+
+                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + "')", con);
+                        cmd.ExecuteNonQuery();
+                        //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
+
 
                     }
 
@@ -156,12 +161,42 @@ namespace Panda
                     }
 
                 }
+
+
                 SqlConnection con1 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con1.Open();
-                SqlCommand command= new SqlCommand("DELETE FROM [dbo].[Proveedor] WHERE IdProveedor = '" + IdProv + "'", con1);
+                SqlCommand cmd1 = new SqlCommand("SELECT * FROM[dbo].[Proveedor] where IdProveedor = '" + IdProv + "'", con1);
+                SqlDataReader provel = cmd1.ExecuteReader();
+                if (provel.HasRows)
+                {
+                    while (provel.Read())
+                    {
+
+                        Provel = provel[0].ToString().TrimEnd() + " " + provel[1].ToString().TrimEnd();
+                        
+
+                    }
+                    
+
+                }
+
+                provel.Close();
+
+                SqlConnection con2 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                con2.Open();
+                SqlCommand command= new SqlCommand("DELETE FROM [dbo].[Proveedor] WHERE IdProveedor = '" + IdProv + "'", con2);
                 command.ExecuteNonQuery();
                 MessageBox.Show("Se ha eliminado los campos exitosamente!");
 
+                
+                
+                command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Eliminación','Eliminó " + Provel + "')", con1);
+                command.ExecuteNonQuery();
+                //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
+                provel.Close();
+                con1.Close();
+
+                
 
 
             }
