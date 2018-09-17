@@ -98,5 +98,23 @@ namespace Panda
             }
         }
 
+        bool close = true;
+        private void MenuPrincipal_FormClosing_1(object sender, FormClosingEventArgs e)
+        {
+            if (close) {
+                DialogResult result = MessageBox.Show("Desea salir del programa?", "Salir", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    close = false;
+                    Application.Exit();
+                    
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+         
+        }
     }
 }
