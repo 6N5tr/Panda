@@ -20,8 +20,10 @@ namespace Panda
         {
             InitializeComponent();
             frm1 = PV;
+            
         }
 
+       
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBox1.Text))
@@ -80,7 +82,7 @@ namespace Panda
                     MessageBox.Show("Proveedor agregado exitosamente!");
 
 
-                    command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Agregación','Agregó el proveedor " + textBox1.Text + " " + textBox2.Text + " " + textBox3.Text + " " + textBox4.Text + " " + textBox5.Text + "')", con);
+                    command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Agregación Proveedores','Agregó el proveedor " + textBox1.Text + " " + textBox2.Text + " " + textBox3.Text + " " + textBox4.Text + " " + textBox5.Text + "')", con);
                     command.ExecuteNonQuery();
                     //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
 

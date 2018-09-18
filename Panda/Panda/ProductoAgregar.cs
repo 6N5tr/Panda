@@ -28,13 +28,31 @@ namespace Panda
         private void ProductoAgregar_Load(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor]", con);
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable table = new DataTable();
-            da.Fill(table);
-            comboBox1.DataSource = table;
-            comboBox1.DisplayMember = "NombreProveedor";
-            comboBox1.ValueMember = "NombreProveedor";
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM[dbo].[Proveedor]", con);
+            con.Open();
+            int count = (int)cmd.ExecuteScalar();
+
+            if (count > 0)
+            {
+                
+                cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor]", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable table = new DataTable();
+                da.Fill(table);
+                comboBox1.DataSource = table;
+                comboBox1.DisplayMember = "NombreProveedor";
+                comboBox1.ValueMember = "NombreProveedor";
+            }
+            else
+            {
+                MessageBox.Show("Debe primero agregar al menos un proveedor!");
+                Proveedores prov = new Proveedores();
+                prov.MdiParent = MenuPrincipal.ActiveForm;
+                prov.Show();
+                this.Close();
+            }
+
+           
          
         }
         private void button1_Click(object sender, EventArgs e)
@@ -64,7 +82,6 @@ namespace Panda
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con.Open();
                 SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProducto FROM[dbo].[Producto] WHERE CodigoProducto = '" + textBox1.Text + "'", con);
-                check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
                 SqlDataReader reader = check_User_Name.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -91,7 +108,6 @@ namespace Panda
 
                     SqlConnection con1 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con1.Open();
-                    MessageBox.Show(comboBox1.Text);
                     SqlCommand cmd1 = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] where NombreProveedor = '" + comboBox1.Text.TrimEnd() + "'", con1);
                     SqlDataReader provel = cmd1.ExecuteReader();
                     if (provel.HasRows)
@@ -100,8 +116,7 @@ namespace Panda
                         {
 
                             Provel = provel[0].ToString().TrimEnd();
-                            MessageBox.Show(Provel);
-
+                            
                         }
 
 
@@ -139,6 +154,54 @@ namespace Panda
 
         }
 
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
 
+                e.Handled = true;
+                MessageBox.Show("Este campo solo acepta números");
+            }
+        }
+
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = true;
+                MessageBox.Show("Este campo solo acepta números");
+            }
+        }
+
+        private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = true;
+                MessageBox.Show("Este campo solo acepta números");
+            }
+        }
+
+        private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = true;
+                MessageBox.Show("Este campo solo acepta números");
+            }
+        }
+
+        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+
+                e.Handled = true;
+                MessageBox.Show("Este campo solo acepta números");
+            }
+        }
     }
 }

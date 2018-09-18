@@ -59,7 +59,6 @@ namespace Panda
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con.Open();
                     SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProveedor FROM[dbo].[Proveedor] WHERE CodigoProveedor = '" + nid + "'", con);
-                    check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
                     SqlDataReader reader = check_User_Name.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -70,7 +69,6 @@ namespace Panda
                     reader.Close();
 
                     check_User_Name = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] WHERE NombreProveedor = '" + nid + "'", con);
-                    check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
                     reader = check_User_Name.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -104,7 +102,7 @@ namespace Panda
                         dataGridView1.DataSource = new BindingSource(table, null);
 
 
-                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + "')", con);
+                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Proveedores','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + "')", con);
                         cmd.ExecuteNonQuery();
                         //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
 
