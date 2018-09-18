@@ -19,18 +19,11 @@ namespace Panda
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if ((Application.OpenForms["ProductoAgregar"] as ProductoAgregar) != null)
-            {
-                //Form is already open
-            }
-            else
-            {                
-                ProductoAgregar PA = new ProductoAgregar();
-                PA.ShowDialog();              
-            }
-            
-           
+            ProductoAgregar PR = new ProductoAgregar(this);
+            PR.ShowDialog();
+
+
         }
-        
+
     }
 }

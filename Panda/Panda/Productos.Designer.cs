@@ -33,13 +33,15 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgProducto = new System.Windows.Forms.DataGridView();
+            this.CodigoProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioAdquisicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PrecioVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadMinima = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CantidadMaxima = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProducto)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -47,9 +49,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.Size = new System.Drawing.Size(108, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Codigo Producto";
+            this.label1.Text = "Buscar Por Producto:";
             // 
             // textBox1
             // 
@@ -70,9 +72,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(173, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 13);
+            this.label2.Size = new System.Drawing.Size(114, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Nombre Producto";
+            this.label2.Text = "Buscar Por Proveedor:";
             // 
             // button2
             // 
@@ -84,53 +86,72 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // dataGridView1
+            // dgProducto
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3,
-            this.Column4,
-            this.Column5});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 71);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(780, 359);
-            this.dataGridView1.TabIndex = 6;
+            this.dgProducto.AllowUserToAddRows = false;
+            this.dgProducto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgProducto.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CodigoProducto,
+            this.NombreProducto,
+            this.PrecioAdquisicion,
+            this.PrecioVenta,
+            this.Cantidad,
+            this.CantidadMinima,
+            this.CantidadMaxima});
+            this.dgProducto.Location = new System.Drawing.Point(12, 71);
+            this.dgProducto.Name = "dgProducto";
+            this.dgProducto.Size = new System.Drawing.Size(780, 359);
+            this.dgProducto.TabIndex = 6;
             // 
-            // Column1
+            // CodigoProducto
             // 
-            this.Column1.HeaderText = "Codigo";
-            this.Column1.Name = "Column1";
+            this.CodigoProducto.DataPropertyName = "CodigoProducto";
+            this.CodigoProducto.HeaderText = "Codigo";
+            this.CodigoProducto.Name = "CodigoProducto";
             // 
-            // Column2
+            // NombreProducto
             // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column2.HeaderText = "Nombre";
-            this.Column2.Name = "Column2";
+            this.NombreProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NombreProducto.DataPropertyName = "NombreProducto";
+            this.NombreProducto.HeaderText = "Nombre";
+            this.NombreProducto.Name = "NombreProducto";
             // 
-            // Column3
+            // PrecioAdquisicion
             // 
-            this.Column3.HeaderText = "P. Adquisición";
-            this.Column3.Name = "Column3";
+            this.PrecioAdquisicion.DataPropertyName = "PrecioAdquisicion";
+            this.PrecioAdquisicion.HeaderText = "P. Adquisición";
+            this.PrecioAdquisicion.Name = "PrecioAdquisicion";
             // 
-            // Column4
+            // PrecioVenta
             // 
-            this.Column4.HeaderText = "P. Venta";
-            this.Column4.Name = "Column4";
+            this.PrecioVenta.DataPropertyName = "PrecioVenta";
+            this.PrecioVenta.HeaderText = "P. Venta";
+            this.PrecioVenta.Name = "PrecioVenta";
             // 
-            // Column5
+            // Cantidad
             // 
-            this.Column5.HeaderText = "Cantidad";
-            this.Column5.Name = "Column5";
+            this.Cantidad.DataPropertyName = "Cantidad";
+            this.Cantidad.HeaderText = "Cantidad";
+            this.Cantidad.Name = "Cantidad";
+            // 
+            // CantidadMinima
+            // 
+            this.CantidadMinima.DataPropertyName = "CantidadMinima";
+            this.CantidadMinima.HeaderText = "Min.";
+            this.CantidadMinima.Name = "CantidadMinima";
+            // 
+            // CantidadMaxima
+            // 
+            this.CantidadMaxima.DataPropertyName = "CantidadMaxima";
+            this.CantidadMaxima.HeaderText = "Max.";
+            this.CantidadMaxima.Name = "CantidadMaxima";
             // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 441);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgProducto);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label2);
@@ -140,7 +161,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Productos";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgProducto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,11 +174,13 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        public System.Windows.Forms.DataGridView dgProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CodigoProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NombreProducto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioAdquisicion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PrecioVenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadMinima;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CantidadMaxima;
     }
 }
