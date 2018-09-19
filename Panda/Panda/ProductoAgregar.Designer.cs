@@ -53,7 +53,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(135, 40);
             this.button1.TabIndex = 8;
-            this.button1.Text = "Agregar Poveedor";
+            this.button1.Text = "Agregar Producto";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

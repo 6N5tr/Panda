@@ -15,6 +15,7 @@ namespace Panda
     {
         string id;
         string nid;
+        string IdProdU;
         string IdProd;
         string IdProvb;
         string Provel;
@@ -96,18 +97,41 @@ namespace Panda
                     }
                     else
                     {
+
+                        con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                        con.Open(); 
+                        SqlCommand cmd = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] Where " + columnName + "='" + id + "'", con);
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+
+                                IdProdU = dr[0].ToString();
+
+                            }
+                            dr.Close();
+                            con.Close();
+                        }
+
+                        con.Open();
                         SqlCommand command = new SqlCommand("UPDATE [dbo].[Producto] SET [" + columnName + "] = '" + nid + "' WHERE IdProducto = '" + IdProd + "'", con);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Modificación realizada exitosamente!");
 
-                        SqlCommand cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM [dbo].[Producto]", con);
+
+
+
+                        cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM [dbo].[Producto]", con);
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();
                         da.Fill(table);
                         dgProducto.DataSource = new BindingSource(table, null);
 
+                      
 
-                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Productos','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + "')", con);
+
+                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Productos','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + " de "+ IdProdU+"')", con);
                         cmd.ExecuteNonQuery();
                         //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
 

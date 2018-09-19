@@ -16,6 +16,7 @@ namespace Panda
         string id;
         string nid;
         string IdProv;
+        string IdProvU;
         string Provel;
         bool dupl = false;
 
@@ -91,18 +92,35 @@ namespace Panda
                     }
                     else
                     {
+
+                        con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                        con.Open();
+                        SqlCommand cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] Where " + columnName + "='" + id + "'", con);
+                        SqlDataReader dr = cmd.ExecuteReader();
+                        if (dr.HasRows)
+                        {
+                            while (dr.Read())
+                            {
+
+                                IdProvU = dr[0].ToString();
+
+                            }
+                            dr.Close();
+                            con.Close();
+                        }
+                        con.Open();
                         SqlCommand command = new SqlCommand("UPDATE [dbo].[Proveedor] SET [" + columnName + "] = '" + nid + "' WHERE IdProveedor = '" + IdProv + "'", con);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Modificación realizada exitosamente!");
 
-                        SqlCommand cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);
+                        cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
                         DataTable table = new DataTable();
                         da.Fill(table);
                         dataGridView1.DataSource = new BindingSource(table, null);
 
 
-                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Proveedores','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + "')", con);
+                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Proveedores','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + " de " + IdProvU + "')", con);
                         cmd.ExecuteNonQuery();
                         //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
 
@@ -140,6 +158,9 @@ namespace Panda
                     id = dataGridView1.Rows[rowindex].Cells[columnindex].Value.ToString();
 
                     string columnName = dataGridView1.Columns[columnindex].Name;
+
+
+
 
 
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
@@ -180,6 +201,13 @@ namespace Panda
 
                 provel.Close();
 
+                SqlConnection con3 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                con3.Open();
+                SqlCommand cmd3 = new SqlCommand("DELETE FROM [dbo].[Producto] WHERE IdProveedor = '" + IdProv + "'", con3);
+                cmd3.ExecuteNonQuery();
+
+
+
                 SqlConnection con2 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con2.Open();
                 SqlCommand command= new SqlCommand("DELETE FROM [dbo].[Proveedor] WHERE IdProveedor = '" + IdProv + "'", con2);
@@ -188,7 +216,7 @@ namespace Panda
 
                 
                 
-                command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Eliminación','Eliminó el proveedor " + Provel + "')", con1);
+                command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Eliminación Proveedor','Eliminó el proveedor " + Provel + "')", con1);
                 command.ExecuteNonQuery();
                 //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
                 provel.Close();
