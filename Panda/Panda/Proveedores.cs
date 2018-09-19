@@ -59,7 +59,7 @@ namespace Panda
                     
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con.Open();
-                    SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProveedor FROM[dbo].[Proveedor] WHERE CodigoProveedor = '" + nid + "'", con);
+                    SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProveedor FROM[dbo].[Proveedor] WHERE CodigoProveedor = '" + nid.TrimEnd() + "'", con);
                     SqlDataReader reader = check_User_Name.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -69,7 +69,7 @@ namespace Panda
                     }
                     reader.Close();
 
-                    check_User_Name = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] WHERE NombreProveedor = '" + nid + "'", con);
+                    check_User_Name = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] WHERE NombreProveedor = '" + nid.TrimEnd() + "'", con);
                     reader = check_User_Name.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -95,21 +95,21 @@ namespace Panda
 
                         con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                         con.Open();
-                        SqlCommand cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] Where " + columnName + "='" + id + "'", con);
+                        SqlCommand cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] Where " + columnName.TrimEnd() + "='" + id.TrimEnd() + "'", con);
                         SqlDataReader dr = cmd.ExecuteReader();
                         if (dr.HasRows)
                         {
                             while (dr.Read())
                             {
 
-                                IdProvU = dr[0].ToString();
+                                IdProvU = dr[0].ToString().TrimEnd();
 
                             }
                             dr.Close();
                             con.Close();
                         }
                         con.Open();
-                        SqlCommand command = new SqlCommand("UPDATE [dbo].[Proveedor] SET [" + columnName + "] = '" + nid + "' WHERE IdProveedor = '" + IdProv + "'", con);
+                        SqlCommand command = new SqlCommand("UPDATE [dbo].[Proveedor] SET [" + columnName.TrimEnd() + "] = '" + nid.TrimEnd() + "' WHERE IdProveedor = '" + IdProv.TrimEnd() + "'", con);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Modificación realizada exitosamente!");
 
@@ -120,7 +120,7 @@ namespace Panda
                         dataGridView1.DataSource = new BindingSource(table, null);
 
 
-                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Proveedores','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + " de " + IdProvU + "')", con);
+                        cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Proveedores','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + " de " + IdProvU.TrimEnd() + "')", con);
                         cmd.ExecuteNonQuery();
                         //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
 
@@ -165,14 +165,14 @@ namespace Panda
 
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] Where " + columnName + "='" + id + "'", con);
+                    SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] Where " + columnName.TrimEnd() + "='" + id.TrimEnd() + "'", con);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
                         while (dr.Read())
                         {
 
-                            IdProv = dr[0].ToString();
+                            IdProv = dr[0].ToString().TrimEnd();
 
                         }
                         dr.Close();
@@ -184,7 +184,7 @@ namespace Panda
 
                 SqlConnection con1 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con1.Open();
-                SqlCommand cmd1 = new SqlCommand("SELECT * FROM[dbo].[Proveedor] where IdProveedor = '" + IdProv + "'", con1);
+                SqlCommand cmd1 = new SqlCommand("SELECT * FROM[dbo].[Proveedor] where IdProveedor = '" + IdProv.TrimEnd() + "'", con1);
                 SqlDataReader provel = cmd1.ExecuteReader();
                 if (provel.HasRows)
                 {
@@ -203,14 +203,14 @@ namespace Panda
 
                 SqlConnection con3 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con3.Open();
-                SqlCommand cmd3 = new SqlCommand("DELETE FROM [dbo].[Producto] WHERE IdProveedor = '" + IdProv + "'", con3);
+                SqlCommand cmd3 = new SqlCommand("DELETE FROM [dbo].[Producto] WHERE IdProveedor = '" + IdProv.TrimEnd() + "'", con3);
                 cmd3.ExecuteNonQuery();
 
 
 
                 SqlConnection con2 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con2.Open();
-                SqlCommand command= new SqlCommand("DELETE FROM [dbo].[Proveedor] WHERE IdProveedor = '" + IdProv + "'", con2);
+                SqlCommand command= new SqlCommand("DELETE FROM [dbo].[Proveedor] WHERE IdProveedor = '" + IdProv.TrimEnd() + "'", con2);
                 command.ExecuteNonQuery();
                 MessageBox.Show("Se ha eliminado los campos exitosamente!");
 
@@ -250,14 +250,14 @@ namespace Panda
 
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] Where "+columnName+"='"+id+"'", con);
+                SqlCommand cmd = new SqlCommand("SELECT IdProveedor FROM[dbo].[Proveedor] Where "+columnName.TrimEnd()+"='"+id.TrimEnd()+"'", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
                     while (dr.Read())
                     {
                        
-                        IdProv = dr[0].ToString();
+                        IdProv = dr[0].ToString().TrimEnd();
                                          
                     }
                     dr.Close();
@@ -297,5 +297,26 @@ namespace Panda
 
             }
         }
+
+        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+            if (dataGridView1.CurrentCell.ColumnIndex == 2) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+        }
+        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

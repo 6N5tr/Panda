@@ -50,7 +50,6 @@ namespace Panda
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con.Open();
                 SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProveedor FROM[dbo].[Proveedor] WHERE CodigoProveedor = '" + textBox1.Text + "'", con);
-                check_User_Name.Parameters.AddWithValue("@user", textBox1.Text);
                 SqlDataReader reader = check_User_Name.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -61,7 +60,6 @@ namespace Panda
                 }
                 reader.Close();
                 check_User_Name = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] WHERE NombreProveedor = '" + textBox2.Text + "'", con);
-                check_User_Name.Parameters.AddWithValue("@user", textBox2.Text);
                 reader = check_User_Name.ExecuteReader();
                 if (reader.HasRows)
                 {

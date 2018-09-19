@@ -62,7 +62,7 @@ namespace Panda
 
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con.Open();
-                    SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProducto FROM[dbo].[Producto] WHERE CodigoProducto = '" + nid + "'", con);
+                    SqlCommand check_User_Name = new SqlCommand("SELECT CodigoProducto FROM[dbo].[Producto] WHERE CodigoProducto = '" + nid.TrimEnd() + "'", con);
                     SqlDataReader reader = check_User_Name.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -72,7 +72,7 @@ namespace Panda
                     }
                     reader.Close();
 
-                    check_User_Name = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] WHERE NombreProducto = '" + nid + "'", con);
+                    check_User_Name = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] WHERE NombreProducto = '" + nid.TrimEnd() + "'", con);
                     reader = check_User_Name.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -100,14 +100,14 @@ namespace Panda
 
                         con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                         con.Open(); 
-                        SqlCommand cmd = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] Where " + columnName + "='" + id + "'", con);
+                        SqlCommand cmd = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] Where " + columnName.TrimEnd() + "='" + id.TrimEnd() + "'", con);
                         SqlDataReader dr = cmd.ExecuteReader();
                         if (dr.HasRows)
                         {
                             while (dr.Read())
                             {
 
-                                IdProdU = dr[0].ToString();
+                                IdProdU = dr[0].ToString().TrimEnd();
 
                             }
                             dr.Close();
@@ -115,7 +115,7 @@ namespace Panda
                         }
 
                         con.Open();
-                        SqlCommand command = new SqlCommand("UPDATE [dbo].[Producto] SET [" + columnName + "] = '" + nid + "' WHERE IdProducto = '" + IdProd + "'", con);
+                        SqlCommand command = new SqlCommand("UPDATE [dbo].[Producto] SET [" + columnName.TrimEnd() + "] = '" + nid.TrimEnd() + "' WHERE IdProducto = '" + IdProd.TrimEnd() + "'", con);
                         command.ExecuteNonQuery();
                         MessageBox.Show("Modificación realizada exitosamente!");
 
@@ -173,14 +173,14 @@ namespace Panda
 
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT IdProducto FROM[dbo].[Producto] Where " + columnName + "='" + id + "'", con);
+                    SqlCommand cmd = new SqlCommand("SELECT IdProducto FROM[dbo].[Producto] Where " + columnName.TrimEnd() + "='" + id.TrimEnd() + "'", con);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
                         while (dr.Read())
                         {
 
-                            IdProd = dr[0].ToString();
+                            IdProd = dr[0].ToString().TrimEnd();
 
                         }
                         dr.Close();
@@ -192,7 +192,7 @@ namespace Panda
 
                 SqlConnection con1 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con1.Open();
-                SqlCommand cmd1 = new SqlCommand("SELECT * FROM[dbo].[Producto] where IdProducto = '" + IdProd + "'", con1);
+                SqlCommand cmd1 = new SqlCommand("SELECT * FROM[dbo].[Producto] where IdProducto = '" + IdProd.TrimEnd() + "'", con1);
                 SqlDataReader provel = cmd1.ExecuteReader();
                 if (provel.HasRows)
                 {
@@ -211,7 +211,7 @@ namespace Panda
 
                 SqlConnection con2 = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con2.Open();
-                SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Producto] WHERE IdProducto = '" + IdProd + "'", con2);
+                SqlCommand command = new SqlCommand("DELETE FROM [dbo].[Producto] WHERE IdProducto = '" + IdProd.TrimEnd() + "'", con2);
                 command.ExecuteNonQuery();
                 MessageBox.Show("Se ha eliminado los campos exitosamente!");
 
@@ -247,7 +247,7 @@ namespace Panda
 
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT IdProducto FROM[dbo].[Producto] Where " + columnName + "='" + id + "'", con);
+                SqlCommand cmd = new SqlCommand("SELECT IdProducto FROM[dbo].[Producto] Where " + columnName.TrimEnd() + "='" + id.TrimEnd() + "'", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -324,7 +324,7 @@ namespace Panda
 
                 con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM[dbo].[Producto] where " +
-                  "IdProveedor ='" + IdProvb + "'", con);
+                  "IdProveedor ='" + IdProvb.TrimEnd() + "'", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 da.Fill(table);
