@@ -35,7 +35,7 @@ namespace Panda
 
         private void Productos_Load(object sender, EventArgs e)
         {
-
+            
 
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
             SqlCommand cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM [dbo].[Producto]", con);
@@ -44,11 +44,11 @@ namespace Panda
             da.Fill(table);
             dgProducto.DataSource = new BindingSource(table, null);
 
-
         }
 
         private void dgProducto_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+
             int rowindex = dgProducto.CurrentCell.RowIndex;
             int columnindex = dgProducto.CurrentCell.ColumnIndex;
             string columnName = dgProducto.Columns[columnindex].Name;
@@ -119,16 +119,7 @@ namespace Panda
                         command.ExecuteNonQuery();
                         MessageBox.Show("Modificación realizada exitosamente!");
 
-
-
-
-                        cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM [dbo].[Producto]", con);
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable table = new DataTable();
-                        da.Fill(table);
-                        dgProducto.DataSource = new BindingSource(table, null);
-
-                      
+                                                                  
 
 
                         cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Productos','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + " de "+ IdProdU+"')", con);
@@ -199,7 +190,7 @@ namespace Panda
                     while (provel.Read())
                     {
 
-                        Provel = provel[0].ToString().TrimEnd() + " " + provel[1].ToString().TrimEnd();
+                        Provel = provel[0].ToString().TrimEnd() + " " + provel[1].ToString().TrimEnd() + " " + provel[2].ToString().TrimEnd() + " " + provel[3].ToString().TrimEnd() + " " + provel[4].ToString().TrimEnd() + " " + provel[5].ToString().TrimEnd() + " " + provel[6].ToString().TrimEnd();
 
 
                     }
@@ -233,6 +224,7 @@ namespace Panda
 
         private void dgProducto_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            
 
             if (dgProducto.SelectedCells.Count > 0)
             {
@@ -331,6 +323,82 @@ namespace Panda
                 dgProducto.DataSource = new BindingSource(table, null);
 
             }
+        }
+
+        private void dgProducto_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(Column2_KeyPress);
+            if (dgProducto.CurrentCell.ColumnIndex ==2) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+            if (dgProducto.CurrentCell.ColumnIndex == 3) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                }
+            }
+            if (dgProducto.CurrentCell.ColumnIndex == 4) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column2_KeyPress);
+                }
+            }
+            if (dgProducto.CurrentCell.ColumnIndex == 5) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column2_KeyPress);
+                }
+            }
+            if (dgProducto.CurrentCell.ColumnIndex == 6) //Desired Column
+            {
+                TextBox tb = e.Control as TextBox;
+                if (tb != null)
+                {
+                    tb.KeyPress += new KeyPressEventHandler(Column2_KeyPress);
+                }
+            }
+        }
+
+        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+            TextBox textBox = (TextBox)sender;
+            // only allow one decimal point
+            if (e.KeyChar == '.' && textBox.Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+            if (!char.IsControl(e.KeyChar) && textBox.SelectionLength == 0)
+            {
+                if (textBox.Text.IndexOf('.') > -1 && textBox.Text.Substring(textBox.Text.IndexOf('.')).Length >= 3)
+                {
+                    e.Handled = true;
+                }
+            }
+
+        }
+        private void Column2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            
         }
     }
 }

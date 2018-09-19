@@ -156,51 +156,67 @@ namespace Panda
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
-
                 e.Handled = true;
-                MessageBox.Show("Este campo solo acepta números");
+            }
+            TextBox textBox = (TextBox)sender;
+            // only allow one decimal point
+            if (e.KeyChar == '.' && textBox.Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+            if (!char.IsControl(e.KeyChar) && textBox.SelectionLength == 0)
+            {
+                if (textBox.Text.IndexOf('.') > -1 && textBox.Text.Substring(textBox.Text.IndexOf('.')).Length >= 3)
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
-
                 e.Handled = true;
-                MessageBox.Show("Este campo solo acepta números");
+            }
+            TextBox textBox = (TextBox)sender;
+            // only allow one decimal point
+            if (e.KeyChar == '.' && textBox.Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+            if (!char.IsControl(e.KeyChar) && textBox.SelectionLength == 0)
+            {
+                if (textBox.Text.IndexOf('.') > -1 && textBox.Text.Substring(textBox.Text.IndexOf('.')).Length >= 3)
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void textBox5_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-
                 e.Handled = true;
-                MessageBox.Show("Este campo solo acepta números");
             }
         }
 
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-
                 e.Handled = true;
-                MessageBox.Show("Este campo solo acepta números");
             }
         }
 
         private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-
                 e.Handled = true;
-                MessageBox.Show("Este campo solo acepta números");
             }
         }
     }

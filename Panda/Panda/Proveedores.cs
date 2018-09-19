@@ -113,13 +113,7 @@ namespace Panda
                         command.ExecuteNonQuery();
                         MessageBox.Show("Modificación realizada exitosamente!");
 
-                        cmd = new SqlCommand("SELECT CodigoProveedor,NombreProveedor,Telefono,Preventa,Posventa  " + "FROM[dbo].[Proveedor]", con);
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable table = new DataTable();
-                        da.Fill(table);
-                        dataGridView1.DataSource = new BindingSource(table, null);
-
-
+                        
                         cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Edición Proveedores','Cambió " + columnName.TrimEnd() + " " + id.TrimEnd() + " por " + nid.TrimEnd() + " de " + IdProvU.TrimEnd() + "')", con);
                         cmd.ExecuteNonQuery();
                         //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
@@ -312,10 +306,13 @@ namespace Panda
         }
         private void Column1_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
+
                 e.Handled = true;
             }
+           
         }
 
     }
