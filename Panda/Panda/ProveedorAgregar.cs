@@ -26,6 +26,7 @@ namespace Panda
        
         private void button1_Click(object sender, EventArgs e)
         {
+            dupl = false;
             if (string.IsNullOrEmpty(textBox1.Text))
             {
                 MessageBox.Show("Indique un codigo para el proveedor");
@@ -41,7 +42,7 @@ namespace Panda
                 camp = true;
 
             }
-            else {
+            else{
                 camp = false;
             }
 
@@ -56,6 +57,7 @@ namespace Panda
                     MessageBox.Show("Verifique el codigo del proveedor. Ya existe un proveedor con ese codigo!");
                     textBox1.Text = "";
                     dupl = true;
+                    
 
                 }
                 reader.Close();
@@ -66,7 +68,7 @@ namespace Panda
                     MessageBox.Show("Verifique el nombre del proveedor. Ya existe un proveedor con ese nombre!");
                     textBox2.Text = "";
                     dupl = true;
-
+                    
                 }
                 reader.Close();
 
@@ -74,13 +76,13 @@ namespace Panda
                 {
 
                     reader.Close();
-                    SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Proveedor] Values ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "')", con);
+                    SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Proveedor] Values ('" + textBox1.Text.TrimEnd() + "','" + textBox2.Text.TrimEnd() + "','" + textBox3.Text.TrimEnd() + "','" + textBox4.Text.TrimEnd() + "','" + textBox5.Text.TrimEnd() + "')", con);
                     command.ExecuteNonQuery();
 
                     MessageBox.Show("Proveedor agregado exitosamente!");
 
 
-                    command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Agregación Proveedores','Agregó el proveedor " + textBox1.Text + " " + textBox2.Text + " " + textBox3.Text + " " + textBox4.Text + " " + textBox5.Text + "')", con);
+                    command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Agregación Proveedores','Agregó el proveedor " + textBox1.Text.TrimEnd() + " " + textBox2.Text.TrimEnd() + " " + textBox3.Text.TrimEnd() + " " + textBox4.Text.TrimEnd() + " " + textBox5.Text.TrimEnd() + "')", con);
                     command.ExecuteNonQuery();
                     //MessageBox.Show(Login.Emp.TrimEnd() +" " + DateTime.Now.ToString("MMMM dd, yyyy") + " "+ DateTime.Now.ToString("h:mm:ss tt"));
 

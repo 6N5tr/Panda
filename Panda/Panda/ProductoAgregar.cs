@@ -57,6 +57,7 @@ namespace Panda
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            dupl = false;
             if (string.IsNullOrEmpty(textBox1.Text))
             {
                 MessageBox.Show("Indique un codigo para el producto");
@@ -88,7 +89,7 @@ namespace Panda
                     MessageBox.Show("Verifique el codigo del producto. Ya existe un producto con ese codigo!");
                     textBox1.Text = "";
                     dupl = true;
-
+                    camp = true;
                 }
                 reader.Close();
                 check_User_Name = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] WHERE NombreProducto = '" + textBox2.Text + "'", con);
@@ -99,6 +100,7 @@ namespace Panda
                     MessageBox.Show("Verifique el nombre del producto. Ya existe un producto con ese nombre!");
                     textBox2.Text = "";
                     dupl = true;
+                    camp = true;
 
                 }
                 reader.Close();
@@ -125,7 +127,7 @@ namespace Panda
                     provel.Close();
 
                     reader.Close();
-                    SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Producto] Values ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "','" + textBox5.Text + "','" + textBox6.Text + "','" + textBox7.Text + "','"+Provel+"')", con);
+                    SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Producto] Values ('" + textBox1.Text.TrimEnd() + "','" + textBox2.Text.TrimEnd() + "','" + textBox3.Text.TrimEnd() + "','" + textBox4.Text.TrimEnd() + "','" + textBox5.Text.TrimEnd() + "','" + textBox6.Text.TrimEnd() + "','" + textBox7.Text.TrimEnd() + "','"+Provel.TrimEnd() + "')", con);
                     command.ExecuteNonQuery();
 
                     MessageBox.Show("Producto agregado exitosamente!");
@@ -133,7 +135,7 @@ namespace Panda
 
                     
 
-                    command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Agregación Productos','Agregó el producto " + textBox1.Text + " " + textBox2.Text + " " + textBox3.Text + " " + textBox4.Text + " " + textBox5.Text + "" + textBox6.Text + " " + textBox7.Text + "')", con);
+                    command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Agregación Productos','Agregó el producto " + textBox1.Text.TrimEnd() + " " + textBox2.Text.TrimEnd() + " " + textBox3.Text.TrimEnd() + " " + textBox4.Text.TrimEnd() + " " + textBox5.Text.TrimEnd() + "" + textBox6.Text.TrimEnd() + " " + textBox7.Text.TrimEnd() + "')", con);
                     command.ExecuteNonQuery();
                    
                     SqlCommand cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM [dbo].[Producto]", con);
