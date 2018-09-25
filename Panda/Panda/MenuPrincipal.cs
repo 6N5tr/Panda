@@ -119,5 +119,33 @@ namespace Panda
             }
 
         }
+
+        private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if ((Application.OpenForms["Ventas"] as Ventas) != null)
+            {
+                List<Form> forms = new List<Form>();
+
+                // All opened myForm instances
+                foreach (Form f in Application.OpenForms)
+                    if (f.Name == "Ventas")
+                        forms.Add(f);
+
+                // Now let's close opened myForm instances
+                foreach (Form f in forms)
+                    f.Close();
+
+                Ventas vt = new Ventas();
+                vt.MdiParent = this;
+                vt.Show();
+            }
+            else
+            {
+                Ventas vt = new Ventas();
+                vt.MdiParent = this;
+                vt.Show();
+            }
+
+        }
     }
 }

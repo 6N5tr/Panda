@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+
 namespace Panda
 {
     public partial class Productos : Form
@@ -20,6 +21,10 @@ namespace Panda
         string IdProvb;
         string Provel;
         bool dupl = false;
+
+        public static string valorcelda;
+        public static string columnanombre;
+
         public Productos()
         {
             InitializeComponent();
@@ -36,7 +41,6 @@ namespace Panda
         private void Productos_Load(object sender, EventArgs e)
         {
             
-
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
             SqlCommand cmd = new SqlCommand("SELECT CodigoProducto,NombreProducto,PrecioAdquisicion,PrecioVenta,Cantidad,CantidadMinima,CantidadMaxima FROM [dbo].[Producto]", con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -399,6 +403,31 @@ namespace Panda
                 e.Handled = true;
             }
             
+        }
+
+        private void dgProducto_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex ==4)
+
+            {
+
+                if (dgProducto.SelectedCells.Count > 0)
+                {
+
+                    int rowindex = dgProducto.CurrentCell.RowIndex;
+                    int columnindex = dgProducto.CurrentCell.ColumnIndex;
+
+                    valorcelda = dgProducto.Rows[rowindex].Cells[columnindex].Value.ToString();
+
+                    columnanombre = dgProducto.Columns[columnindex].Name;
+
+                    CantidadAgregar CA = new CantidadAgregar(this);
+                    CA.ShowDialog();
+                  
+                    
+                }
+
+            }
         }
     }
 }

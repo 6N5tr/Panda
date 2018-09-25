@@ -107,6 +107,7 @@
             this.dgProducto.Size = new System.Drawing.Size(780, 359);
             this.dgProducto.TabIndex = 6;
             this.dgProducto.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgProducto_CellBeginEdit);
+            this.dgProducto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProducto_CellDoubleClick);
             this.dgProducto.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProducto_CellEndEdit);
             this.dgProducto.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgProducto_EditingControlShowing);
             this.dgProducto.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgProducto_UserDeletingRow);

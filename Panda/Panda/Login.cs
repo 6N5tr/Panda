@@ -47,54 +47,57 @@ namespace Panda
                 MessageBox.Show("Ingrese su contraseña");
             }
 
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
-            SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
-                "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
-
-            DataTable dt = new DataTable();
-
-            sda.Fill(dt);
-
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.HasRows)
+            if (textBox1.Text != "" && textBox2.Text != "")
             {
-                while (dr.Read())
+                SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
+                    "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+
+                DataTable dt = new DataTable();
+
+                sda.Fill(dt);
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows)
                 {
-                    Emp = dr[0].ToString();
+                    while (dr.Read())
+                    {
+                        Emp = dr[0].ToString();
 
+                    }
                 }
-            }
-            dr.Close();
-            cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
-            dr = cmd.ExecuteReader();
-            if (dr.HasRows)
-            {
-                while (dr.Read())
-                {
-                    Emp = dr[0].ToString();
-                    User = Emp;
-                    
-                }
-               
-            }
-            if (dt.Rows.Count == 1)
-            {
-
-                this.Hide();
-                MenuPrincipal main = new MenuPrincipal();
-                main.Show();
                 dr.Close();
-                con.Close();
-            }
-            else
-            {
+                cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                dr = cmd.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        Emp = dr[0].ToString();
+                        User = Emp;
 
-                MessageBox.Show("Nombre de usuario o contraseña invalidos");
-                textBox2.Text = "";
+                    }
 
-            }
+                }
+                if (dt.Rows.Count == 1)
+                {
+
+                    this.Hide();
+                    MenuPrincipal main = new MenuPrincipal();
+                    main.Show();
+                    dr.Close();
+                    con.Close();
+                }
+                else
+                {
+
+                    MessageBox.Show("Nombre de usuario o contraseña invalidos");
+                    textBox1.Text = "";
+                    textBox2.Text = "";
+                }
+            }   
         }
 
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
@@ -128,6 +131,154 @@ namespace Panda
                     Application.Exit();
                 }
             }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (int)Keys.Enter)
+            {
+
+
+                if (textBox1.Text == "" && textBox2.Text == "")
+                {
+                    MessageBox.Show("Ingrese su nombre de usuario y su contraseña");
+                }
+                if (textBox1.Text == "" && textBox2.Text != "")
+                {
+                    MessageBox.Show("Ingrese su nombre de usuario");
+                }
+                if (textBox2.Text == "" && textBox1.Text != "")
+                {
+                    MessageBox.Show("Ingrese su contraseña");
+                }
+                if (textBox1.Text != "" && textBox2.Text != "")
+                {
+                    SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                    SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
+                        "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            Emp = dr[0].ToString();
+
+                        }
+                    }
+                    dr.Close();
+                    cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            Emp = dr[0].ToString();
+                            User = Emp;
+
+                        }
+
+                    }
+                    if (dt.Rows.Count == 1)
+                    {
+
+                        this.Hide();
+                        MenuPrincipal main = new MenuPrincipal();
+                        main.Show();
+                        dr.Close();
+                        con.Close();
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Nombre de usuario o contraseña invalidos");
+                        textBox1.Text = "";
+                        textBox2.Text = "";
+
+                    }
+                }
+            }
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (int)Keys.Enter)
+            {
+
+
+                if (textBox1.Text == "" && textBox2.Text == "")
+                {
+                    MessageBox.Show("Ingrese su nombre de usuario y su contraseña");
+                }
+                if (textBox1.Text == "" && textBox2.Text != "")
+                {
+                    MessageBox.Show("Ingrese su nombre de usuario");
+                }
+                if (textBox2.Text == "" && textBox1.Text != "")
+                {
+                    MessageBox.Show("Ingrese su contraseña");
+                }
+
+                if (textBox1.Text != "" && textBox2.Text != "")
+                {
+                    SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                    SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
+                        "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+
+                    DataTable dt = new DataTable();
+
+                    sda.Fill(dt);
+
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            Emp = dr[0].ToString();
+
+                        }
+                    }
+                    dr.Close();
+                    cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            Emp = dr[0].ToString();
+                            User = Emp;
+
+                        }
+
+                    }
+                    if (dt.Rows.Count == 1)
+                    {
+
+                        this.Hide();
+                        MenuPrincipal main = new MenuPrincipal();
+                        main.Show();
+                        dr.Close();
+                        con.Close();
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("Nombre de usuario o contraseña invalidos");
+                        textBox1.Text = "";
+                        textBox2.Text = "";
+
+                    }
+                }
+
+                }
         }
     }
 }
