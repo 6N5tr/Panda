@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using System.Globalization;
 
 namespace Panda
 {
@@ -20,6 +20,9 @@ namespace Panda
         private readonly Productos frm2;
         bool dupl = false;
         bool camp = false;
+        bool camp1 = false;
+        bool camp2 = false;
+        bool camp3 = false;
         public ProductoAgregar(Productos PR)
         {
             InitializeComponent();
@@ -70,15 +73,41 @@ namespace Panda
             if (string.IsNullOrEmpty(textBox2.Text))
             {
                 MessageBox.Show("Indique un nombre para el producto");
-                camp = true;
+                camp1 = true;
 
             }
             else
             {
-                camp = false;
+                camp1 = false;
             }
 
-            if (camp == false)
+            /*string[] a = textBox3.Text.Split(new char[] { '.' });
+            int decimals = a[0].Length;
+            if (decimals==0) {
+                camp2 = true;
+                textBox3.Text = "";
+                MessageBox.Show("Los precios se indican de la siguiente manera. Ej: 0.15");
+                
+            }
+            else
+            {
+                camp2 = false;
+          
+            }
+            string[] a1 = textBox4.Text.Split(new char[] { '.' });
+            int decimals1 = a1[0].Length;
+            if (decimals1 == 0)
+            {
+                camp3 = true;
+                textBox4.Text = "";
+                MessageBox.Show("Los precios se indican de la siguiente manera. Ej: 0.15");
+            }
+            else
+            {
+                camp3 = false;
+            }
+            */
+            if (camp == false && camp1==false && camp2 == false && camp3 == false)
             {
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 con.Open();
@@ -158,6 +187,7 @@ namespace Panda
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
+                       
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {
                 e.Handled = true;
@@ -175,6 +205,7 @@ namespace Panda
                     e.Handled = true;
                 }
             }
+            
         }
 
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)

@@ -104,7 +104,7 @@
             this.dgProducto.Name = "dgProducto";
             this.dgProducto.RowHeadersVisible = false;
             this.dgProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgProducto.Size = new System.Drawing.Size(780, 359);
+            this.dgProducto.Size = new System.Drawing.Size(800, 359);
             this.dgProducto.TabIndex = 6;
             this.dgProducto.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgProducto_CellBeginEdit);
             this.dgProducto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProducto_CellDoubleClick);
@@ -159,7 +159,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(804, 441);
+            this.ClientSize = new System.Drawing.Size(824, 461);
             this.Controls.Add(this.dgProducto);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);

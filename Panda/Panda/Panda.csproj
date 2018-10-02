@@ -103,6 +103,12 @@
     <Compile Include="Ventas.Designer.cs">
       <DependentUpon>Ventas.cs</DependentUpon>
     </Compile>
+    <Compile Include="VentasAgregar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentasAgregar.Designer.cs">
+      <DependentUpon>VentasAgregar.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CantidadAgregar.resx">
       <DependentUpon>CantidadAgregar.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +144,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentasAgregar.resx">
+      <DependentUpon>VentasAgregar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

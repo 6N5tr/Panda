@@ -101,7 +101,7 @@ namespace Panda
                     }
                     else
                     {
-
+                       
                         con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                         con.Open(); 
                         SqlCommand cmd = new SqlCommand("SELECT NombreProducto FROM[dbo].[Producto] Where " + columnName.TrimEnd() + "='" + id.TrimEnd() + "'", con);
