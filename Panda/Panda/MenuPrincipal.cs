@@ -14,6 +14,7 @@ namespace Panda
     public partial class MenuPrincipal : Form
     {
         int cpest=0;
+        bool mas = false;
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace Panda
         private void MenuPrincipal_Load_1(object sender, EventArgs e)
         {
 
-
+            
             tabControl1.TabPages.Clear();
             tabControl1.Visible = false;
             if (Login.Emp.Substring(0, 1) == "E")
@@ -145,6 +146,7 @@ namespace Panda
                 vt.ControlBox = false;
                 vt.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
                 vt.Dock = DockStyle.Fill;
+
                 var newTab = new TabPage();
                 newTab.Controls.Add(vt);
                 this.tabControl1.TabPages.Add(newTab);
@@ -152,9 +154,17 @@ namespace Panda
                 this.tabControl1.SelectedTab = newTab;
                 vt.Show();
 
+                
+                var newTab1 = new TabPage();
+                this.tabControl1.TabPages.Add(newTab1);
+                newTab1.Text = "+";
+               
+                
+
+
             }
             else {
-                tabControl1.Visible = true;
+             tabControl1.Visible = true;
             }
 
             
@@ -164,6 +174,8 @@ namespace Panda
        
         private void nuevaVentaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+
             Ventas vt = new Ventas();
             vt.MdiParent = this;
             vt.WindowState = FormWindowState.Maximized;
@@ -171,7 +183,7 @@ namespace Panda
             vt.Activate();
             vt.Focus();
 
-                       
+
             cpest++;
             tabControl1.Visible = true;
             vt.TopLevel = false;
@@ -180,86 +192,139 @@ namespace Panda
             vt.Dock = DockStyle.Fill;
             var newTab = new TabPage();
             newTab.Controls.Add(vt);
-            this.tabControl1.TabPages.Add(newTab);
-            newTab.Text = "Venta "+cpest+"       ";
+            this.tabControl1.TabPages.Insert(0, newTab);
+            newTab.Text = "Venta " + cpest + "       ";
             this.tabControl1.SelectedTab = newTab;
             vt.Show();
 
-                                                         
+
 
 
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
-            e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
-            e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
-            e.DrawFocusRectangle();
+            int count = this.tabControl1.TabPages.Count;
+            if (e.Index == count-1)
+            {
+                e.Graphics.DrawString("", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+                e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+                e.DrawFocusRectangle();
+            }
+            else {
+
+                e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+                e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+                e.DrawFocusRectangle();
+            }
+           
         }
 
         private void tabControl1_MouseDown(object sender, MouseEventArgs e)
         {
+            int count = this.tabControl1.TabPages.Count;
             for (int i = 0; i < this.tabControl1.TabPages.Count; i++)
             {
-                Rectangle r = tabControl1.GetTabRect(i);
-                //Getting the position of the "x" mark.
-                Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 15, 7);
-                if (closeButton.Contains(e.Location))
+                if (i == count-1) {
+
+                }
+                else
                 {
-                    if (MessageBox.Show("Desea cerrar esta ventana de ventas?","", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    Rectangle r = tabControl1.GetTabRect(i);
+                    //Getting the position of the "x" mark.
+                    Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 15, 7);
+                    if (closeButton.Contains(e.Location))
                     {
-                        if (tabControl1.TabPages.Count <= 1)
+                        if (MessageBox.Show("Desea cerrar esta ventana de ventas?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                           this.tabControl1.TabPages.RemoveAt(i);
-                            tabControl1.Visible = false;
-                            cpest = 0;
-
-                            if ((Application.OpenForms["Productos"] as Productos) != null)
+                            if (tabControl1.TabPages.Count <= 1)
                             {
-                                List<Form> forms = new List<Form>();
+                                this.tabControl1.TabPages.RemoveAt(i);
+                                tabControl1.Visible = false;
+                                cpest = 0;
 
-                                // All opened myForm instances
-                                foreach (Form f in Application.OpenForms)
-                                    if (f.Name == "Productos")
-                                        forms.Add(f);
+                                if ((Application.OpenForms["Productos"] as Productos) != null)
+                                {
+                                    List<Form> forms = new List<Form>();
 
-                                // Now let's close opened myForm instances
-                                foreach (Form f in forms)
-                                    f.Close();
+                                    // All opened myForm instances
+                                    foreach (Form f in Application.OpenForms)
+                                        if (f.Name == "Productos")
+                                            forms.Add(f);
 
-                                Productos prod = new Productos();
-                                prod.MdiParent = this;
-                                prod.Show();
+                                    // Now let's close opened myForm instances
+                                    foreach (Form f in forms)
+                                        f.Close();
+
+                                    Productos prod = new Productos();
+                                    prod.MdiParent = this;
+                                    prod.Show();
+                                }
+                                if ((Application.OpenForms["Proveedores"] as Proveedores) != null)
+                                {
+                                    List<Form> forms = new List<Form>();
+
+                                    // All opened myForm instances
+                                    foreach (Form f in Application.OpenForms)
+                                        if (f.Name == "Proveedores")
+                                            forms.Add(f);
+
+                                    // Now let's close opened myForm instances
+                                    foreach (Form f in forms)
+                                        f.Close();
+
+                                    Proveedores prov = new Proveedores();
+                                    prov.MdiParent = this;
+                                    prov.Show();
+                                }
+
+
+
                             }
-                            if ((Application.OpenForms["Proveedores"] as Proveedores) != null)
+                            else
                             {
-                                List<Form> forms = new List<Form>();
-
-                                // All opened myForm instances
-                                foreach (Form f in Application.OpenForms)
-                                    if (f.Name == "Proveedores")
-                                        forms.Add(f);
-
-                                // Now let's close opened myForm instances
-                                foreach (Form f in forms)
-                                    f.Close();
-
-                                Proveedores prov = new Proveedores();
-                                prov.MdiParent = this;
-                                prov.Show();
+                                this.tabControl1.TabPages.RemoveAt(i);
+                               
+                               
                             }
-                           
 
-
+                            break;
                         }
-                        else {
-                            this.tabControl1.TabPages.RemoveAt(i);
-
-                        }
-
-                        break;
                     }
                 }
+                
+            }
+        }
+
+      
+        private void tabControl1_Click(object sender, EventArgs e)
+        {
+            int count = this.tabControl1.TabPages.Count;
+            if (tabControl1.SelectedIndex == count - 1)//your specific tabname
+            {
+
+                Ventas vt = new Ventas();
+                vt.MdiParent = this;
+                vt.WindowState = FormWindowState.Maximized;
+                vt.TopMost = true;
+                vt.Activate();
+                vt.Focus();
+
+
+                cpest++;
+                tabControl1.Visible = true;
+                vt.TopLevel = false;
+                vt.ControlBox = false;
+                vt.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                vt.Dock = DockStyle.Fill;
+                var newTab = new TabPage();
+                newTab.Controls.Add(vt);
+                this.tabControl1.TabPages.Insert(0, newTab);
+                newTab.Text = "Venta " + cpest + "       ";
+                this.tabControl1.SelectedTab = newTab;
+                vt.Show();
+
+                
             }
         }
     }

@@ -72,8 +72,8 @@
             // nuevaVentaToolStripMenuItem
             // 
             this.nuevaVentaToolStripMenuItem.Name = "nuevaVentaToolStripMenuItem";
-            this.nuevaVentaToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
-            this.nuevaVentaToolStripMenuItem.Text = "Agregar Ventana De Ventas";
+            this.nuevaVentaToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.nuevaVentaToolStripMenuItem.Text = "Nueva Venta";
             this.nuevaVentaToolStripMenuItem.Click += new System.EventHandler(this.nuevaVentaToolStripMenuItem_Click);
             // 
             // productosToolStripMenuItem
@@ -128,6 +128,7 @@
             this.tabControl1.Size = new System.Drawing.Size(824, 440);
             this.tabControl1.TabIndex = 4;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             this.tabControl1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseDown);
             // 
             // tabPage1
