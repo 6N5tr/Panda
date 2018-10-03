@@ -186,9 +186,41 @@ namespace Panda
                 
                 if (e.Index <=count-1)
                 {
-                     e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
-                e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
-                e.DrawFocusRectangle();
+                     
+
+                    if (e.Index == tabControl1.SelectedIndex)
+                    {
+                        TabPage page = tabControl1.TabPages[e.Index];
+                        Color col = Color.LawnGreen; 
+                        e.Graphics.FillRectangle(new SolidBrush(col), e.Bounds);
+
+                        Rectangle paddedBounds = e.Bounds;
+                        int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+                        paddedBounds.Offset(1, yOffset);
+                        TextRenderer.DrawText(e.Graphics, page.Text, Font, paddedBounds, page.ForeColor);
+
+                        e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+                        //e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+                        e.DrawFocusRectangle();
+
+                    }
+                    else
+                    {
+                        TabPage page = tabControl1.TabPages[e.Index];
+                        Color col = Color.LightSkyBlue;
+                        e.Graphics.FillRectangle(new SolidBrush(col), e.Bounds);
+
+                        Rectangle paddedBounds = e.Bounds;
+                        int yOffset = (e.State == DrawItemState.Selected) ? -2 : 1;
+                        paddedBounds.Offset(1, yOffset);
+                        TextRenderer.DrawText(e.Graphics, page.Text, Font, paddedBounds, page.ForeColor);
+
+                        e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+                        //e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+                        e.DrawFocusRectangle();
+
+                    }
+                    
                 }
                
             }
@@ -201,7 +233,7 @@ namespace Panda
             for (int i = 0; i < this.tabControl1.TabPages.Count; i++)
             {
                 if (i == count-1) {
-
+                    
                 }
                 else
                 {
@@ -212,11 +244,13 @@ namespace Panda
                     {
                         if (MessageBox.Show("Desea cerrar esta ventana de ventas?", "", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
-                            if (tabControl1.TabPages.Count <= 1)
+                            if (count-1 <= 1)
                             {
                                 this.tabControl1.TabPages.RemoveAt(i);
                                 tabControl1.Visible = false;
+                                tabControl1.TabPages.Clear();
                                 cpest = 0;
+
 
                                 if ((Application.OpenForms["Productos"] as Productos) != null)
                                 {
