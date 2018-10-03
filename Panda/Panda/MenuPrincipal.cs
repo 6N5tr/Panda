@@ -13,8 +13,8 @@ namespace Panda
 {
     public partial class MenuPrincipal : Form
     {
-        int cpest=0;
-        int current;
+        public static int cpest=0;
+        
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -125,14 +125,14 @@ namespace Panda
             }
 
         }
-
+        
         private void ventasToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
 
             if (tabControl1.TabPages.Count == 0)
             {
-                Ventas vt = new Ventas();
+                Ventas vt = new Ventas(this);
                 vt.MdiParent = this;
                 vt.WindowState = FormWindowState.Maximized;
                 vt.TopMost = true;
@@ -293,6 +293,7 @@ namespace Panda
                             else
                             {
                                 this.tabControl1.TabPages.RemoveAt(i);
+
                                
                                
                             }
@@ -314,7 +315,7 @@ namespace Panda
             if (tabControl1.SelectedIndex == count - 1)//your specific tabname
             {
                 
-                Ventas vt = new Ventas();
+                Ventas vt = new Ventas(this);
                 vt.MdiParent = this;
                 vt.WindowState = FormWindowState.Maximized;
                 vt.TopMost = true;

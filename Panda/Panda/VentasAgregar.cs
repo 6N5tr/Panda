@@ -54,7 +54,7 @@ namespace Panda
                 
                 frm2.dgVenta.DataSource = null;
               
-                frm2.dgVenta.Rows.Add(label1.Text, textBox1.Text, Convert.ToDouble(label2.Text) * Convert.ToDouble(textBox1.Text));
+                frm2.dgVenta.Rows.Add(label1.Text, textBox1.Text, (Convert.ToDouble(label2.Text) * Convert.ToDouble(textBox1.Text)).ToString("N2"));
                 
 
 
@@ -80,7 +80,7 @@ namespace Panda
                     Total += Convert.ToDecimal(frm2.dgVenta.Rows[i].Cells["VentaPrecio"].Value);
                 }
 
-               frm2.textBox1.Text = Total.ToString();
+               frm2.textBox1.Text = Total.ToString("N2");
 
 
 
