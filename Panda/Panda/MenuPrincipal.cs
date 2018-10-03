@@ -14,7 +14,7 @@ namespace Panda
     public partial class MenuPrincipal : Form
     {
         int cpest=0;
-        bool mas = false;
+        int current;
         public MenuPrincipal()
         {
             InitializeComponent();
@@ -172,36 +172,7 @@ namespace Panda
         }
 
        
-        private void nuevaVentaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-
-            Ventas vt = new Ventas();
-            vt.MdiParent = this;
-            vt.WindowState = FormWindowState.Maximized;
-            vt.TopMost = true;
-            vt.Activate();
-            vt.Focus();
-
-
-            cpest++;
-            tabControl1.Visible = true;
-            vt.TopLevel = false;
-            vt.ControlBox = false;
-            vt.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            vt.Dock = DockStyle.Fill;
-            var newTab = new TabPage();
-            newTab.Controls.Add(vt);
-            this.tabControl1.TabPages.Insert(0, newTab);
-            newTab.Text = "Venta " + cpest + "       ";
-            this.tabControl1.SelectedTab = newTab;
-            vt.Show();
-
-
-
-
-        }
-
+       
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             int count = this.tabControl1.TabPages.Count;
@@ -212,10 +183,14 @@ namespace Panda
                 e.DrawFocusRectangle();
             }
             else {
-
-                e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+                
+                if (e.Index <=count-1)
+                {
+                     e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
                 e.Graphics.DrawString(this.tabControl1.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
                 e.DrawFocusRectangle();
+                }
+               
             }
            
         }
@@ -297,12 +272,14 @@ namespace Panda
         }
 
       
+
         private void tabControl1_Click(object sender, EventArgs e)
         {
+            
             int count = this.tabControl1.TabPages.Count;
             if (tabControl1.SelectedIndex == count - 1)//your specific tabname
             {
-
+                
                 Ventas vt = new Ventas();
                 vt.MdiParent = this;
                 vt.WindowState = FormWindowState.Maximized;
@@ -324,8 +301,9 @@ namespace Panda
                 this.tabControl1.SelectedTab = newTab;
                 vt.Show();
 
-                
             }
         }
+
+
     }
 }
