@@ -17,8 +17,9 @@ namespace Panda
     {
         private readonly Ventas frm2;
 
-        public static bool addr = false;
-   
+        public static string CP;
+        public static string CPM;
+        public static int C;
         public VentasAgregar(Ventas V)
         {
             InitializeComponent();
@@ -47,86 +48,95 @@ namespace Panda
            
             if (Convert.ToInt32(textBox1.Text) >= 1) {
 
-                //frm2.dgVenta.Rows.Clear();
-                //frm2.dgVenta.Refresh();
-                // frm2.dgVenta.
-                frm2.dgVenta.AutoGenerateColumns = false;
-                
-                frm2.dgVenta.DataSource = null;
-              
-                frm2.dgVenta.Rows.Add(label1.Text, textBox1.Text, (Convert.ToDouble(label2.Text) * Convert.ToDouble(textBox1.Text)).ToString("N2"));
-                
 
-
-
-
-                //DataTable dataTable = (DataTable)frm2.dgVenta.DataSource;
-                //DataRow drToAdd = dataTable.NewRow();
-
-                //drToAdd["VentaNombre"] = label1.Text;
-                //drToAdd["VentaCantidad"] = textBox1.Text;
-                //drToAdd["VentaPrecio"] = Convert.ToDouble(label2.Text) * Convert.ToDouble(textBox1.Text);
-
-
-                //dataTable.Rows.Add(drToAdd);
-                //dataTable.AcceptChanges();
-
-
-
-                decimal Total = 0;
-
-                for (int i = 0; i < frm2.dgVenta.Rows.Count; i++)
+                bool existe = false;
+                foreach (DataGridViewRow row in frm2.dgVenta.Rows)
                 {
-                    Total += Convert.ToDecimal(frm2.dgVenta.Rows[i].Cells["VentaPrecio"].Value);
+                    if (Convert.ToString(row.Cells[0].Value).Equals(Ventas.NP.TrimEnd()))
+                    {
+                        existe = true;
+                    }
+                }
+                if (existe == true)
+                {
+                    MessageBox.Show("El producto ya fue ingresado en la venta actual");
+                }
+                else
+                {
+                    SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT Cantidad FROM[dbo].[Producto] where NombreProducto ='" + Ventas.NP.TrimEnd() + "'", con);
+                    SqlDataReader dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            CP = dr[0].ToString();
+
+                        }
+                    }
+                    dr.Close();
+
+                    cmd = new SqlCommand("SELECT CantidadMinima FROM[dbo].[Producto] where NombreProducto ='" + Ventas.NP.TrimEnd() + "'", con);
+                    SqlDataReader dr1 = cmd.ExecuteReader();
+                    if (dr1.HasRows)
+                    {
+                        while (dr1.Read())
+                        {
+                            CPM = dr1[0].ToString();
+
+                        }
+                    }
+                    dr1.Close();
+
+
+
+                    if (Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text) >= Convert.ToInt32(CPM))
+                    {
+
+                        frm2.dgVenta.AutoGenerateColumns = false;
+
+                        frm2.dgVenta.DataSource = null;
+
+                        frm2.dgVenta.Rows.Add(label1.Text, textBox1.Text, (Convert.ToDouble(label2.Text) * Convert.ToDouble(textBox1.Text)).ToString("N2"));
+
+
+                        decimal Total = 0;
+
+                        for (int i = 0; i < frm2.dgVenta.Rows.Count; i++)
+                        {
+                            Total += Convert.ToDecimal(frm2.dgVenta.Rows[i].Cells["VentaPrecio"].Value);
+                        }
+
+                        frm2.textBox1.Text = Total.ToString("N2");
+
+
+
+                        con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
+                        con.Open();
+
+
+
+                        if (frm2.dgVenta.Rows.Count >= 0)
+                        {
+                            frm2.button2.Enabled = true;
+                        }
+
+                        //con.Close();
+                        this.Close();
+
+
+                    }
+                    else
+                    {
+
+                        MessageBox.Show("No hay producto para la venta. Solo hay "+ CPM.TrimEnd() + " de "+ Ventas.NP+"");
+                    }
                 }
 
-               frm2.textBox1.Text = Total.ToString("N2");
+           
 
-
-
-                //SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
-                //con.Open();
-
-                //valor = Ventas.PP;
-
-
-                //SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Venta] Values ('" + Ventas.NP.TrimEnd() + "','" + textBox1.Text.TrimEnd() + "','" + valor.Replace(",", ".") + "')", con);
-                //command.ExecuteNonQuery();
-
-
-                //con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
-                //con.Open();
-                //command = new SqlCommand("Select SUM(CAST(VentaPrecio AS decimal(10,2)))FROM Venta", con);
-
-                //SqlDataReader dr = command.ExecuteReader();
-                //if (dr.HasRows)
-                //{
-                //    while (dr.Read())
-                //    {
-
-                //        preciototal = dr[0].ToString().TrimEnd();
-
-                //    }
-                //    dr.Close();
-                //    con.Close();
-                //}
-                //con.Close();
-                //con.Open();
-                //SqlCommand cmd = new SqlCommand("SELECT VentaNombre,VentaPrecio,VentaCantidad FROM[dbo].[Venta]", con);
-                //SqlDataAdapter da = new SqlDataAdapter(cmd);
-                //DataTable table = new DataTable();
-                //da.Fill(table);
-
-                //frm2.dgVenta.DataSource = new BindingSource(table, null);
-                //frm2.textBox1.Text = preciototal;
-
-                if (frm2.dgVenta.Rows.Count >= 0)
-                {
-                    frm2.button2.Enabled = true;
-                }
-
-                //con.Close();
-                this.Close();
+                
             }
             else
             {

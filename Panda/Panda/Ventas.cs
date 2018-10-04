@@ -110,7 +110,7 @@ namespace Panda
             DataTable table = new DataTable();
             da.Fill(table);
             dgVenta.DataSource = new BindingSource(table, null);
-            VentasAgregar.addr = true;
+         
             foreach (DataGridViewRow row in dgVenta.Rows)
             {
 
@@ -130,6 +130,11 @@ namespace Panda
 
                 SqlCommand command = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Venta Productos','Se vendió " + Cantidad.TrimEnd() + " del producto " + Venta.TrimEnd() + " a " + Precio.TrimEnd() + "')", con);
                 command.ExecuteNonQuery();
+
+                command = new SqlCommand("Update [dbo].[Producto] set cantidad =" +
+                 "(Select Cantidad from[dbo].[Producto] where NombreProducto = '" + Venta.TrimEnd() + "') - " + Precio.TrimEnd() + "" +
+                 "where NombreProducto = '" + Ventas.NP.TrimEnd() + "'", con);
+                command.ExecuteNonQuery();
             }
 
             
@@ -141,6 +146,11 @@ namespace Panda
 
             cmd = new SqlCommand("INSERT INTO [dbo].[Registro] Values ('" + Login.Emp.TrimEnd() + "','" + DateTime.Now.ToString("MMMM dd, yyyy") + "','" + DateTime.Now.ToString("h:mm:ss tt") + "','Venta Productos Total','Se vendió total " + textBox1.Text.TrimEnd() + "')", con1);
             cmd.ExecuteNonQuery();
+
+
+        
+
+
             MessageBox.Show("Venta Realizada!");
 
             cmd = new SqlCommand("DELETE FROM [dbo].[Venta]", con1);
