@@ -93,6 +93,12 @@ namespace Panda
 
                     if (Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text) >= Convert.ToInt32(CPM))
                     {
+                        MessageBox.Show("Hay " + CPM.TrimEnd() + " de " + Ventas.NP + "");
+                    }
+
+
+                    if (Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text) >= 0)
+                    {
 
                         frm2.dgVenta.AutoGenerateColumns = false;
 
@@ -127,11 +133,10 @@ namespace Panda
 
 
                     }
-                    else
-                    {
-
-                        MessageBox.Show("No hay producto para la venta. Solo hay "+ CPM.TrimEnd() + " de "+ Ventas.NP+"");
+                    else {
+                        MessageBox.Show("Se termino el producto para la venta!");
                     }
+                   
                 }
 
            
