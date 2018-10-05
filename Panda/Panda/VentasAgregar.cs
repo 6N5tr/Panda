@@ -91,14 +91,16 @@ namespace Panda
 
 
 
-                    if (Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text) >= Convert.ToInt32(CPM))
-                    {
-                        MessageBox.Show("Hay " + CPM.TrimEnd() + " de " + Ventas.NP + "");
-                    }
 
 
                     if (Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text) >= 0)
                     {
+
+
+                        if (Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text) <= Convert.ToInt32(CPM))
+                        {
+                            MessageBox.Show("Quedan " + Convert.ToString(Convert.ToInt32(CP) - Convert.ToInt32(textBox1.Text)) + " de " + Ventas.NP + "");
+                        }
 
                         frm2.dgVenta.AutoGenerateColumns = false;
 
@@ -134,7 +136,7 @@ namespace Panda
 
                     }
                     else {
-                        MessageBox.Show("Se termino el producto para la venta!");
+                        MessageBox.Show("No hay esa cantidad de producto para la venta!. Solo hay " + Convert.ToString(Convert.ToInt32(CP)) + " de " + Ventas.NP + "");
                     }
                    
                 }
