@@ -104,7 +104,7 @@
             this.dgProducto.Name = "dgProducto";
             this.dgProducto.RowHeadersVisible = false;
             this.dgProducto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgProducto.Size = new System.Drawing.Size(800, 359);
+            this.dgProducto.Size = new System.Drawing.Size(800, 352);
             this.dgProducto.TabIndex = 6;
             this.dgProducto.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgProducto_CellBeginEdit);
             this.dgProducto.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgProducto_CellDoubleClick);
