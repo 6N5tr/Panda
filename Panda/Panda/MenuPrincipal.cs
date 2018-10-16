@@ -339,6 +339,33 @@ namespace Panda
             }
         }
 
+        private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabControl1.Visible = false;
 
+            if ((Application.OpenForms["Usuarios"] as Usuarios) != null)
+            {
+                List<Form> forms = new List<Form>();
+
+                // All opened myForm instances
+                foreach (Form f in Application.OpenForms)
+                    if (f.Name == "Usuarios")
+                        forms.Add(f);
+
+                // Now let's close opened myForm instances
+                foreach (Form f in forms)
+                    f.Close();
+
+                Usuarios us = new Usuarios();
+                us.MdiParent = this;
+                us.Show();
+            }
+            else
+            {
+                Usuarios us = new Usuarios();
+                us.MdiParent = this;
+                us.Show();
+            }
+        }
     }
 }
