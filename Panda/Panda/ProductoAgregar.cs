@@ -38,7 +38,7 @@ namespace Panda
             if (count > 0)
             {
                 
-                cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor]", con);
+                cmd = new SqlCommand("SELECT NombreProveedor FROM[dbo].[Proveedor] order by NombreProveedor", con);
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable table = new DataTable();
                 da.Fill(table);
@@ -81,32 +81,7 @@ namespace Panda
                 camp1 = false;
             }
 
-            /*string[] a = textBox3.Text.Split(new char[] { '.' });
-            int decimals = a[0].Length;
-            if (decimals==0) {
-                camp2 = true;
-                textBox3.Text = "";
-                MessageBox.Show("Los precios se indican de la siguiente manera. Ej: 0.15");
-                
-            }
-            else
-            {
-                camp2 = false;
-          
-            }
-            string[] a1 = textBox4.Text.Split(new char[] { '.' });
-            int decimals1 = a1[0].Length;
-            if (decimals1 == 0)
-            {
-                camp3 = true;
-                textBox4.Text = "";
-                MessageBox.Show("Los precios se indican de la siguiente manera. Ej: 0.15");
-            }
-            else
-            {
-                camp3 = false;
-            }
-            */
+         
             if (camp == false && camp1==false && camp2 == false && camp3 == false)
             {
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");

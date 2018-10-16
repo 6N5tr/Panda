@@ -51,14 +51,14 @@ namespace Panda
             {
                 SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                 SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
-                    "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_AS", con);
 
                 DataTable dt = new DataTable();
 
                 sda.Fill(dt);
 
                 con.Open();
-                SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_AS", con);
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -68,8 +68,9 @@ namespace Panda
 
                     }
                 }
+               
                 dr.Close();
-                cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
                 dr = cmd.ExecuteReader();
                 if (dr.HasRows)
                 {
@@ -155,14 +156,14 @@ namespace Panda
                 {
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
-                        "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                        "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
 
                     DataTable dt = new DataTable();
 
                     sda.Fill(dt);
 
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
@@ -173,7 +174,7 @@ namespace Panda
                         }
                     }
                     dr.Close();
-                    cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
                     dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
@@ -229,14 +230,14 @@ namespace Panda
                 {
                     SqlConnection con = new SqlConnection("Data Source=DESKTOP-9PPVGAJ;Initial Catalog=Panda;Integrated Security=True");
                     SqlDataAdapter sda = new SqlDataAdapter("SELECT *  " +
-                        "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                        "FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "'  COLLATE SQL_Latin1_General_CP1_CS_ASand Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
 
                     DataTable dt = new DataTable();
 
                     sda.Fill(dt);
 
                     con.Open();
-                    SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    SqlCommand cmd = new SqlCommand("SELECT Tipo FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
                     SqlDataReader dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
@@ -247,7 +248,7 @@ namespace Panda
                         }
                     }
                     dr.Close();
-                    cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' and Contraseña = '" + textBox2.Text + "'", con);
+                    cmd = new SqlCommand("SELECT NombreUsuario FROM[dbo].[Login] where NombreUsuario = '" + textBox1.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS and Contraseña = '" + textBox2.Text + "' COLLATE SQL_Latin1_General_CP1_CS_AS", con);
                     dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
